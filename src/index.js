@@ -11,12 +11,6 @@ import rootSaga from './sagas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const sagaMiddleware = createSagaMiddleware();
 axios.defaults.baseURL = 'https://www.quandl.com/api/v3/datasets';
-
-const INITIAL_STATE = [
-  {
-    items:['dummy data'],
-  }
-]
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 console.log(store)
 sagaMiddleware.run(rootSaga);

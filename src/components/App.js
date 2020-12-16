@@ -11,13 +11,14 @@ class App extends React.Component {
 
   handleSubmit = () => {
     console.log('Clicked Button')
-    this.props.getDOW();
+    this.props.getDOWRequest();
   }
 
   render(){
     // <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
     // <Input type="date" name="Date" placeholder="YYYY-MM-DD" />
     // </FormGroup>
+    console.log('gotta have my props')
     console.log(this.props)
     return (
       <div className="App">
@@ -32,21 +33,22 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state){
-  return{
-    items:state.items
-  };
+  console.log('mapping state to props')
+  return {
+    items: state//.dow[0].items
+  }
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
-    getDOW: getDOWRequest
+    getDOWRequest: getDOWRequest
   }, dispatch)
 }
+//
+// export default connect(({data}) => ({data}),{
+//   getDOWRequest
+// })(App);
 
-export default connect(({data}) => ({data}),{
-  getDOWRequest
-})(App);
 
 
-
-// export default connect(mapStateToProps,mapDispatchToProps)(App)
+export default connect(mapStateToProps,mapDispatchToProps)(App)
