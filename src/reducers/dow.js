@@ -1,0 +1,25 @@
+import {Types} from '../actions/dow';
+
+
+const INITIAL_STATE = [
+  {
+    items:['dummy data'],
+  }
+]
+
+
+export default function dowReducer(state =  INITIAL_STATE, action){
+  switch (action.type){
+    case Types.GET_DOW_SUCCESS:{
+      console.log('successful dowReducer call')
+      console.log(action.payload)
+      return {
+        ...state,
+      }
+
+      action.payload
+    }
+    default:
+      return state  ;
+  }
+}
