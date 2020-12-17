@@ -12,9 +12,7 @@ axios.defaults.baseURL = 'https://www.quandl.com/api/v3/datasets'
 class App extends React.Component {
 
   handleSubmit = () => {
-    this.props.getDOWRequest();
-    console.log(this.props.date);
-    console.log();
+    this.props.getDOWRequest(this.props.date);
   }
   handleDateInput = (e) =>{
     this.props.changeDate(e.target.value)

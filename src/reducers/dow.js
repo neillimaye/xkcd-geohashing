@@ -1,5 +1,4 @@
 import {Types} from '../actions/dow';
-import moment from 'moment'
 const INITIAL_STATE = [
   {
     data: ['dummy data'],
