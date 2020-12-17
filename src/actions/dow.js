@@ -3,8 +3,9 @@ export const Types = {
 	GET_DOW_SUCCESS: 'GET_DOW_SUCCESS'
 };
 
-export const getDOWRequest = () => ({
-	type: Types.GET_DOW_REQUEST
+export const getDOWRequest = (date) => ({
+	type: Types.GET_DOW_REQUEST,
+	date
 });
 
 export const getDOWSuccess = ({items}) => ({
