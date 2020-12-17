@@ -13,9 +13,10 @@ class App extends React.Component {
 
   handleSubmit = () => {
     this.props.getDOWRequest();
+    console.log(this.props.date);
+    console.log();
   }
   handleDateInput = (e) =>{
-    console.log(e.target.value)
     this.props.changeDate(e.target.value)
   }
   render(){
@@ -41,8 +42,8 @@ function mapStateToProps(state){
   // console.log('mapping state to props')
   // console.log(state)
   return {
-    date: state.dateReducer,
-    items: state.dowReducer
+    data: state.dowReducer,
+    date: state.dateReducer
 
   }
 }

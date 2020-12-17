@@ -1,10 +1,10 @@
 import {Types} from '../actions/dow';
+import moment from 'moment'
 const INITIAL_STATE = [
   {
-    items: ['dummy data'],
+    data: ['dummy data'],
   }
 ]
-
 
 export default function dowReducer(state =  INITIAL_STATE, action){
   switch (action.type){
@@ -12,7 +12,6 @@ export default function dowReducer(state =  INITIAL_STATE, action){
       // console.log('successful dowReducer call')
       // console.log(action.payload)
       return {
-        ...state,
         data:action.payload
       }
     }
