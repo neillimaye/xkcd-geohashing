@@ -12,7 +12,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const sagaMiddleware = createSagaMiddleware();
 axios.defaults.baseURL = 'https://www.quandl.com/api/v3/datasets';
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
-console.log(store)
 sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>

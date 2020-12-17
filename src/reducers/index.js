@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
 import dowReducer from './dow';
+import dateReducer from './date'
 
 export default combineReducers({
-	dowData: dowReducer,
+	dowReducer: dowReducer,
+	dateReducer: dateReducer,
 });

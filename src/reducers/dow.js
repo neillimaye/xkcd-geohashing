@@ -1,8 +1,7 @@
 import {Types} from '../actions/dow';
-
-
 const INITIAL_STATE = [
   {
+    items: ['dummy data'],
   }
 ]
 
@@ -18,6 +17,6 @@ export default function dowReducer(state =  INITIAL_STATE, action){
       }
     }
     default:
-      return state  ;
+      return state;
   }
 }
