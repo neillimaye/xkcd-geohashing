@@ -1,9 +1,6 @@
 import {Types} from '../actions/dow';
-const INITIAL_STATE = [
-  {
-    data: ['dummy data'],
-  }
-]
+import {INITIAL_STATE} from '../actions/initialState'
+
 
 export default function dowReducer(state =  INITIAL_STATE, action){
   switch (action.type){

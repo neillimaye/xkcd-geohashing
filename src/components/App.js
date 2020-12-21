@@ -17,6 +17,9 @@ class App extends React.Component {
   handleDateInput = (e) =>{
     this.props.changeDate(e.target.value)
   }
+  doToday = () =>  {
+    this.props.changeDate(moment().format('YYYY-MM-DD'))
+  }
   render(){
     // <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
     // <Input type="date" name="Date" placeholder="YYYY-MM-DD" />
@@ -27,8 +30,9 @@ class App extends React.Component {
       <div className="App">
         <div>
         <Form inline>
-          <Input type = "date" onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")}/>
-          <Button onClick = {this.handleSubmit}>Submit</Button>
+          <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} placeholder = {this.props.date.date}/>
+          <Button color="secondary" onClick = {this.doToday}> Or just use today's date. </Button>
+          <Button color="primary" onClick = {this.handleSubmit}>Submit</Button>
         </Form>
         </div>
       </div>

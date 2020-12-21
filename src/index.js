@@ -10,7 +10,9 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const sagaMiddleware = createSagaMiddleware();
-axios.defaults.baseURL = 'https://www.quandl.com/api/v3/datasets';
+// axios.defaults.baseURL = 'https://www.quandl.com/api/v3/datasets';
+// axios.defaults.baseURL = 'https://www.alphavantage.co/'
+axios.defaults.baseURL = 'http://api.marketstack.com/v1'
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 ReactDOM.render(

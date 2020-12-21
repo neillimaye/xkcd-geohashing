@@ -1,8 +1,6 @@
 import {Types} from '../actions/date';
-import moment from 'moment';
-const INITIAL_STATE = {
-    date: moment("12/21/2012").format("YYYY-MM-DD"),
-}
+import {INITIAL_STATE} from '../actions/initialState'
+
 
 
 export default function dateReducer(state = INITIAL_STATE, action){
