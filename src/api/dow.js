@@ -1,32 +1,30 @@
-//this code does a little more than an API call
-//quandl wouldn't let me look at any information past 2017, which is great
-//IF YOU'RE A STOCKBROKER WITH A FUCKING TIME MACHINE
-
 import axios from 'axios';
-import moment from 'moment'
-
-// ${moment().subtract(2, "days")}
-// ${moment()}
-// const quandlAPIKey = 'Ywd3Gtx2oyyN_Ma3exrG';
-// const alphaVantageAPIKey = 'H96XWBT1J9Y9RN4R';
-const marketStackAPIKey = 'e4a78d676f391288ed0a91c0c3dcacb0';
+import moment from 'moment';
+import _ from 'lodash'
 
 export async function getDOW(date){
-  // code below is to verify that I can manipulate the given date properly to put into the API qrequest
-  // console.log('api date')
-  // console.log((date.date))
-  // console.log(moment(date.date).subtract(2,"days").format('YYYY-MM-DD'))
-  let end_date = moment(date.date).format('YYYY-MM-DD');
-  let start_date = (moment(date.date).subtract(2,"days").format('YYYY-MM-DD'))
-  // for the alphavantage API -
-  // let DOWDataQuery =  `query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=DOW&outputsize=full&apikey=${alphaVantageAPIKey}`
-  // for the quandl API
-  // let DOWDataQuery = `WIKI/DOW.json?collapse=daily&start_date=2020-12-14&end_date=2020-12-16&api_key=Ywd3Gtx2oyyN_Ma3exrG`
-  // for the worldmarket API
-  let DOWDataQuery = `eod?access_key=${marketStackAPIKey}&symbols=DOW&date_from=${start_date}&date_to=${end_date}`
-  //adjusted so that weekends don't cause the system to return
-  let data = await axios.get(DOWDataQuery)
-  console.log('Successful API Call')
-  console.log(data.data.data[0].open)
-  return data;
+  // to adjust for different dates, the outputsize value needs to be adjusted accordingly.
+  // new code uses the twelvedata API server, which provides all the information I need
+  // plus I have rapidapi taking care of the overhead, which is nice
+  let startDate = moment(date.date)
+  let today = moment().format('YYYY-MM-DD')
+  // console.log(startDate)
+  // console.log(today)
+  let daysBetween = -1 * startDate.diff(today,"days")
+  let options = {
+  method: 'GET',
+  url: 'https://twelve-data1.p.rapidapi.com/time_series',
+  params: {symbol: 'DJI', interval: '1day', outputsize: daysBetween, format: 'json'},
+    headers: {
+      'x-rapidapi-key': 'cc072cf6a1mshca7a9fff5bd7131p175ba7jsne97460d453d2',
+      'x-rapidapi-host': 'twelve-data1.p.rapidapi.com'
+    }
+  };
+
+  // console.log('checking the past ' + options.params.outputsize + ' days')
+
+  let result = await axios.request(options)
+  let DJIAdata = result.data.values;
+  let dowOpening = _.find(DJIAdata, {'datetime':moment(startDate).format('YYYY-MM-DD')})
+  return dowOpening.open
 };
