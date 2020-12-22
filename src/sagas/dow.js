@@ -7,11 +7,11 @@ import {Types} from '../actions/dow';
 function* getDOW(action){
 	try{
 		const result = yield call(api.getDOW, action.date);
-		// console.log('successful saga execution')
 		yield put({
 			type: Types.GET_DOW_SUCCESS,
 			payload: result
 		})
+		console.log('successful saga execution')
 	}catch(e){
       console.log('error')
 	}

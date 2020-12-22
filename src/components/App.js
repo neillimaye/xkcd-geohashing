@@ -15,7 +15,8 @@ class App extends React.Component {
     this.props.getDOWRequest(this.props.date);
   }
   handleDateInput = (e) =>{
-    this.props.changeDate(e.target.value)
+
+    this.props.changeDate(e.target.value);
   }
   doToday = () =>  {
     this.props.changeDate(moment().format('YYYY-MM-DD'))
