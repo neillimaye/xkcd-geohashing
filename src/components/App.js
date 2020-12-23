@@ -1,10 +1,10 @@
 import React from 'react'
-import axios from 'axios'
 import {Form, Button, Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {getDOWRequest} from '../actions/dow'
 import {changeDate} from '../actions/date'
 import {changeZIP} from '../actions/zip'
+import {getCoordsRequest} from '../actions/coords'
 import {bindActionCreators} from 'redux'
 import moment from 'moment'
 class App extends React.Component {
@@ -22,8 +22,14 @@ class App extends React.Component {
     this.props.changeZIP(e.target.value);
   }
 
-  componentDidMount(){
+  showLocationData = (data) => {
+    let lat = parseInt(data.coords.latitude);
+    let long = parseInt(data.coords.longitude);
+  }
 
+
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition(this.showLocationData);
   }
   render(){
     // <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -37,7 +43,7 @@ class App extends React.Component {
         <Form inline>
           <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} placeholder = {this.props.date.date}/>
           <Button color="secondary" onClick = {this.doToday}> Or just use today's date. </Button>
-          <Input onChange={this.handleZIPInput} maxLength="9" placeholder= "ZIP code"> </Input>
+          <Input onChange={this.handleZIPInput} maxLength="9" defaultValue= "ZIP code" />
           <Button color="primary" onClick = {this.handleSubmit}>Submit</Button>
         </Form>
         <p> The most recent DOW opening for that day is {this.props.data.data} </p>
@@ -54,6 +60,7 @@ function mapStateToProps(state){
     data: state.dowReducer,
     date: state.dateReducer,
     zip: state.ZIPReducer,
+    coords: state.coordsReducer
   }
 }
 

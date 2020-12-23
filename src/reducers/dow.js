@@ -1,7 +1,6 @@
 import {Types} from '../actions/dow';
 import {INITIAL_STATE} from '../actions/initialState'
 
-
 export default function dowReducer(state =  INITIAL_STATE, action){
   switch (action.type){
     case Types.GET_DOW_SUCCESS:{
@@ -12,6 +11,6 @@ export default function dowReducer(state =  INITIAL_STATE, action){
       }
     }
     default:
-      return state;
+      return state.data;
   }
 }

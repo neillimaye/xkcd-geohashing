@@ -24,7 +24,13 @@ export async function getDOW(date){
   // console.log('checking the past ' + options.params.outputsize + ' days')
 
   let result = await axios.request(options)
-  let DJIAdata = result.data.values;
-  let dowOpening = _.find(DJIAdata, {'datetime':moment(startDate).format('YYYY-MM-DD')})
+  let DJIAdata = 0;
+  let dowOpening = 0;
+  if(result.data.values){
+    DJIAdata = result.data.values;
+    dowOpening = _.find(DJIAdata, {'datetime':moment(startDate).format('YYYY-MM-DD')})
+  }else{
+    return('invalid input')
+  }
   return dowOpening.open
 };
