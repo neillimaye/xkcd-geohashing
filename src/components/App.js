@@ -34,12 +34,15 @@ class App extends React.Component {
       <div className="App">
         <div>
         <Form inline>
-          <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} placeholder = {this.props.date.date}/>
-          <Button color="secondary" onClick = {this.doToday}> Or just use today's date. </Button>
-          <Input onChange={this.handleZIPInput} maxLength="9" placeholder= "ZIP code"> </Input>
+          <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} value = {this.props.date.date}/>
           <Button color="primary" onClick = {this.handleSubmit}>Submit</Button>
+          <p color="secondary" onClick = {this.doToday}> Or just use today's date. </p>
         </Form>
         <p> The most recent DOW opening for that day is {this.props.data.data} </p>
+        <Form inline>
+          <Input onChange={this.handleZIPInput} maxLength="9" placeholder= {this.props.zip.zip} />
+          <Button color="primary" onClick = {this.ZIPtoCoordinates}>Submit</Button>
+        </Form>
         </div>
       </div>
     );
