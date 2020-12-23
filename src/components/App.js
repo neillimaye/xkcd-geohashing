@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import {Form, Button, Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {getDOWRequest} from '../actions/dow'
