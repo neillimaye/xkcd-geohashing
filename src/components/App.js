@@ -2,6 +2,7 @@ import React from 'react'
 import {Form, Button, Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {getDOWRequest} from '../actions/dow'
+import {getCoordsRequest} from '../actions/coords'
 import {changeDate} from '../actions/date'
 import {changeZIP} from '../actions/zip'
 import {bindActionCreators} from 'redux'
@@ -20,9 +21,12 @@ class App extends React.Component {
   handleZIPInput = (e) => {
     this.props.changeZIP(e.target.value);
   }
+  ZIPtoCoordinates = (e) =>{
+    this.props.getCoords(this.props.zip)
+  }
 
   componentDidMount(){
-
+    console.log(this.props)
   }
   render(){
     // <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
@@ -34,12 +38,16 @@ class App extends React.Component {
       <div className="App">
         <div>
         <Form inline>
-          <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} placeholder = {this.props.date.date}/>
+          <Input onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} placeholder = {this.props.date}/>
           <Button color="secondary" onClick = {this.doToday}> Or just use today's date. </Button>
-          <Input onChange={this.handleZIPInput} maxLength="9" placeholder= "ZIP code"> </Input>
           <Button color="primary" onClick = {this.handleSubmit}>Submit</Button>
         </Form>
         <p> The most recent DOW opening for that day is {this.props.data.data} </p>
+        <Form inline>
+          <Input onChange={this.handleZIPInput} maxLength="9" placeholder= {this.props.zip} />
+          <Button color="primary" onClick = {this.ZIPtoCoordinates}>Submit</Button>
+
+        </Form>
         </div>
       </div>
     );
@@ -53,6 +61,7 @@ function mapStateToProps(state){
     data: state.dowReducer,
     date: state.dateReducer,
     zip: state.ZIPReducer,
+    coords: state.coordsReducer
   }
 }
 
@@ -61,6 +70,7 @@ function mapDispatchToProps(dispatch){
     getDOWRequest: getDOWRequest,
     changeDate: changeDate,
     changeZIP: changeZIP,
+    getCoords: getCoordsRequest
   }, dispatch)
 }
 //

@@ -9,6 +9,6 @@ export default function ZIPReducer(state = INITIAL_STATE, action){
       }
     }
     default:
-      return state;
+      return state.zip;
   }
 }
