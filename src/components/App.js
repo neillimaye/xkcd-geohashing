@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Button, Input} from 'reactstrap';
+import {Form, Button, Input, Card, CardTitle, CardSubtitle, CardBody, Row, Col} from 'reactstrap';
 import {connect} from 'react-redux';
 import {getDOWRequest} from '../actions/dow'
 import {getCoordsRequest} from '../actions/coords'
@@ -12,7 +12,7 @@ import MapContainer from './MapContainer'
 
 class App extends React.Component {
 
-  handleSubmit = () => {
+  getDOWOpening = () => {
     this.props.getDOWRequest(this.props.date);
   }
   handleDateInput = (e) =>{
@@ -35,7 +35,6 @@ class App extends React.Component {
     // console.log(coords)
     this.props.getZIPRequest(coords)
   }
-
   getBrowserCoordinates = async () =>{
     // console.log('getting browser coordinates')
     await navigator.geolocation.getCurrentPosition(this.showBrowserCoordinates);
@@ -46,33 +45,51 @@ class App extends React.Component {
     let browserCoords = {lat: lat, lng:lng}
     this.coordstoZIP(browserCoords)
   }
-  componentDidMount(){
-
-  }
   renderMapContainer(){
     return(
-      <MapContainer coords={this.props.coords} data = {this.props.data} date = {this.props.date}></MapContainer>
-
+      <Row>
+          <MapContainer coords={this.props.coords} data = {this.props.data} date = {this.props.date}></MapContainer>
+      </Row>
     )
+  }
+  getMeetupCoordinates = () =>{
+    this.getDOWOpening();
+    this.ZIPtoCoordinates();
+    this.renderMapContainer();
   }
   render(){
     return (
       <div className="App">
         <div>
-        <Form>
-          <Input type="date" onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} defaultValue = {''} value = {this.props.date}/>
-          <Button color="primary" onClick = {this.handleSubmit}>Submit</Button>
-          <p color="secondary" onClick = {this.doToday}> Or just use today's date.</p>
-        </Form>
-          <p> The most recent DOW opening for that day is {this.props.data} </p>
-          <Form>
-            <Input onChange={this.handleZIPInput} maxLength="9" defaultValue = {''} value={this.props.zip} />
-              <Button color="primary" onClick = {this.ZIPtoCoordinates}>Submit</Button>
-          </Form>
-        <Form>
-          <Button color="primary" onClick = {this.getBrowserCoordinates}>Get location from browser</Button>
-        </Form>
-        {this.renderMapContainer()}
+          <Row>
+            <Col sm="4" md="4" lg="4">
+            </Col>
+            <Col sm="4" md="4" lg="4">
+              <Card>
+                <CardTitle>XKCD Geohashing</CardTitle>
+                <CardSubtitle>inspired by xkcd.com/426</CardSubtitle>
+                <CardBody>
+                  <Form>
+                    <Input type="date" onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} defaultValue = {''} value = {this.props.date}/>
+                    <Button color="primary" onClick = {this.getDOWOpening}>Get DOW Opening</Button>
+                    <u color="secondary" onClick = {this.doToday}> Or just use today's date.</u>
+                  </Form>
+                    <p> The most recent DOW opening for that day is {this.props.data} </p>
+                    <Form>
+                      <Input onChange={this.handleZIPInput} maxLength="9" defaultValue = {''} value={this.props.zip} />
+                        <Button color="primary" onClick = {this.ZIPtoCoordinates}>Submit</Button>
+                        <Button color="primary" onClick = {this.getBrowserCoordinates}>Get location from browser</Button>
+                    </Form>
+                  <Form>
+                    <Button color="primary" onClick = {this.getMeetupCoordinates}>Get Meetup Coordinates</Button>
+                  </Form>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col sm="4" md="4" lg="4">
+            </Col>
+          </Row>
+            {this.renderMapContainer()}
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import moment from 'moment'
 export const INITIAL_STATE =  {
-    data: ['dummy data'],
+    data: ['not yet retrieved'],
 		date: moment().format("YYYY-MM-DD"),
     zip: 10010,
     coords: {
