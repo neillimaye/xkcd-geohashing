@@ -6,11 +6,9 @@ export async function getDOW(date){
   // to adjust for different dates, the outputsize value needs to be adjusted accordingly.
   // new code uses the twelvedata API server, which provides all the information I need
   // plus I have rapidapi taking care of the overhead, which is nice
-  let startDate = moment(date.date)
+  let endDate = moment(date);
   let today = moment().format('YYYY-MM-DD')
-  // console.log(startDate)
-  // console.log(today)
-  let daysBetween = -1 * startDate.diff(today,"days")
+  let daysBetween = -1 * endDate.diff(today,"days") +1
   let options = {
   method: 'GET',
   url: 'https://twelve-data1.p.rapidapi.com/time_series',
@@ -20,11 +18,15 @@ export async function getDOW(date){
       'x-rapidapi-host': 'twelve-data1.p.rapidapi.com'
     }
   };
-
-  // console.log('checking the past ' + options.params.outputsize + ' days')
-
   let result = await axios.request(options)
   let DJIAdata = result.data.values;
-  let dowOpening = _.find(DJIAdata, {'datetime':moment(startDate).format('YYYY-MM-DD')})
-  return dowOpening.open
+  let searchDate = endDate;
+  //To handle weekend date inputs, since the markets aren't open on the weekend
+  if (endDate.day() === 6){ //if it's a saturday
+    searchDate = endDate.subtract(1, "days");
+  }else if (endDate.day() === 0) { //if it's a sunday
+    searchDate =endDate.subtract(2, "days");
+  }
+  let dowOpening = _.find(DJIAdata, {'datetime':moment(searchDate).format('YYYY-MM-DD')})
+  return dowOpening.open;
 };

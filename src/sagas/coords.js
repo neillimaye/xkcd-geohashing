@@ -6,7 +6,7 @@ import {Types} from '../actions/coords';
 
 function* getCoords(action){
 	try{
-		const result = yield call(api.getCoords, action.date);
+		const result = yield call(api.getCoords, action.zip);
 		// console.log('successful saga execution')
 		yield put({
 			type: Types.GET_COORDS_SUCCESS,
