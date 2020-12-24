@@ -9,7 +9,8 @@ import {changeZIP} from '../actions/zip'
 import {bindActionCreators} from 'redux'
 import moment from 'moment'
 import md5 from 'md5'
-
+import GoogleMapReact from 'google-map-react';
+import MapContainer from './MapContainer'
 
 class App extends React.Component {
 
@@ -52,14 +53,9 @@ class App extends React.Component {
 
   }
   componentDidMount(){
-
+    console.log(this.props.coords)
   }
   render(){
-    // <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-    // <Input type="date" name="Date" placeholder="YYYY-MM-DD" />
-    // </FormGroup>
-    // console.log('gotta have my props')
-    // console.log(this.props)
     return (
       <div className="App">
         <div>
@@ -84,6 +80,7 @@ class App extends React.Component {
           <Button color="primary" onClick = {this.getGeohash}> Get the location</Button>
         </Form>
 
+        <MapContainer location={this.props.coords} />
         </div>
       </div>
     );
@@ -91,8 +88,6 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state){
-  // console.log('mapping state to props')
-  // console.log(state)
   return {
     data: state.dowReducer.data,
     date: state.dateReducer.date,
@@ -109,11 +104,4 @@ function mapDispatchToProps(dispatch){
     getCoordsRequest: getCoordsRequest
   }, dispatch)
 }
-//
-// export default connect(({data}) => ({data}),{
-//   getDOWRequest
-// })(App);
-
-
-
 export default connect(mapStateToProps,mapDispatchToProps)(App)
