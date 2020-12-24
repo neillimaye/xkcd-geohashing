@@ -1,5 +1,7 @@
 export const Types = {
-	CHANGE_ZIP: 'CHANGE_ZIP'
+	CHANGE_ZIP: 'CHANGE_ZIP',
+	GET_ZIP_REQUEST: 'GET_ZIP_REQUEST',
+	GET_ZIP_SUCCESS: 'GET_ZIP_SUCCESS',
 };
 
 export const changeZIP = (zip) => {
@@ -9,4 +11,13 @@ export const changeZIP = (zip) => {
   }
 }
 
-export default changeZIP;
+export const getZIPRequest = (coords) => ({
+	type: Types.GET_ZIP_REQUEST,
+	coords
+});
+
+export const getZIPSuccess = (coords) => ({
+	type: Types.GET_ZIP_SUCCESS,
+	payload:
+		coords
+});

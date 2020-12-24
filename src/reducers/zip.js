@@ -8,6 +8,13 @@ export default function ZIPReducer(state = INITIAL_STATE, action){
         zip: action.payload
       }
     }
+    case Types.GET_ZIP_REQUEST:{
+      // console.log('successful ZIPReducer call')
+      // console.log(action)
+      return {
+        coords:action.payload
+      }
+    }
     default:
       return state;
   }

@@ -8,6 +8,7 @@ function* getDOW(action){
 	try{
 		const result = yield call(api.getDOW, action.date);
 		// console.log('successful saga execution')
+		console.log(result)
 		yield put({
 			type: Types.GET_DOW_SUCCESS,
 			payload: result
