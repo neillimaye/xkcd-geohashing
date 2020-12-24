@@ -52,10 +52,10 @@ class App extends React.Component {
       </Row>
     )
   }
-  getMeetupCoordinates = () =>{
-    this.getDOWOpening();
-    this.ZIPtoCoordinates();
-    this.renderMapContainer();
+  getMeetupCoordinates = async () =>{
+    await this.getDOWOpening();
+    await this.ZIPtoCoordinates();
+    await this.renderMapContainer();
   }
   render(){
     return (
@@ -77,8 +77,8 @@ class App extends React.Component {
                     <p> The most recent DOW opening for that day is {this.props.data} </p>
                     <Form>
                       <Input onChange={this.handleZIPInput} maxLength="9" defaultValue = {''} value={this.props.zip} />
-                        <Button color="primary" onClick = {this.ZIPtoCoordinates}>Submit</Button>
-                        <Button color="primary" onClick = {this.getBrowserCoordinates}>Get location from browser</Button>
+                        <Button color="primary" onClick = {this.ZIPtoCoordinates}>Get Coordinates</Button>
+                        <Button color="secondary" onClick = {this.getBrowserCoordinates}>Get location from browser instead</Button>
                     </Form>
                   <Form>
                     <Button color="primary" onClick = {this.getMeetupCoordinates}>Get Meetup Coordinates</Button>

@@ -1,7 +1,6 @@
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 import React, { Component} from 'react';
 import md5 from 'md5'
-import {Button} from 'reactstrap'
 
 export class MapContainer extends Component {
 
@@ -34,7 +33,11 @@ render() {
   console.log(this.props)
   return (
     <div>
-      <Map google={this.props.google} center={this.meetupCoords} zoom={15}>
+      <Map
+        google={this.props.google}
+        center={this.meetupCoords}
+        yesIWantToUseGoogleMapApiInternals
+        zoom={15}>
         <Marker
          title={'This is your meetup location.'}
          position={this.meetupCoords} />
