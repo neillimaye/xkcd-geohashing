@@ -7,10 +7,10 @@ import {Types} from '../actions/zip';
 function* getZIP(action){
 	try{
 		// console.log('getzip saga')
-		console.log(action)
+		// console.log(action)
 		const result = yield call(api.getZIP, action.coords);
-		console.log('successful saga execution')
-		console.log(result)
+		// console.log('successful saga execution')
+		// console.log(result)
 		yield put({
 			type: Types.CHANGE_ZIP,
 			payload: result

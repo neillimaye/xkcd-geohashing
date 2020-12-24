@@ -51,7 +51,7 @@ class App extends React.Component {
   }
   renderMapContainer(){
     return(
-    <p>this is a placeholder for the map component</p>
+      <MapContainer coords={this.props.coords} data = {this.props.data} date = {this.props.date}></MapContainer>
 
     )
   }

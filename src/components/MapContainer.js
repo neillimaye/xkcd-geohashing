@@ -24,7 +24,7 @@ export class MapContainer extends Component {
       lat: lat+'.'+todec1,
       lng: lng+'.'+todec2
     }
-    console.log(meetupCoordinates)
+    // console.log(meetupCoordinates)
     this.meetupCoords = meetupCoordinates;
   }
   componentDidUpdate(){
@@ -34,7 +34,6 @@ render() {
   console.log(this.props)
   return (
     <div>
-      <Button onClick ={this.getGeohash}>Get Coordinates</Button>
       <Map google={this.props.google} center={this.meetupCoords} zoom={15}>
         <Marker
          title={'This is your meetup location.'}
