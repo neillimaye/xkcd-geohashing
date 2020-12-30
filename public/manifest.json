@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Geohashing",
+  "name": "XKCD Geohashing",
   "icons": [
     {
       "src": "favicon.ico",
