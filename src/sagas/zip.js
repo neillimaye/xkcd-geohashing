@@ -1,4 +1,4 @@
-import {takeLatest, call, put, fork} from 'redux-saga/effects';
+import {takeLatest, takeEvery, call, put, fork} from 'redux-saga/effects';
 import * as actions from '../actions/zip';
 import * as api from '../api/zip';
 import {Types} from '../actions/zip';
@@ -24,7 +24,7 @@ function* watchGetZIPRequest(){
 	// console.log('watching getzip saga call')
 	//take the latest request action called and then call the getzip function
 	//taking the latest because we want to adjust for when people update the date they put in
-	yield takeLatest(actions.Types.GET_ZIP_REQUEST, getZIP);
+	yield takeEvery(actions.Types.GET_ZIP_REQUEST, getZIP);
 }
 
 const ZIPSagas = [

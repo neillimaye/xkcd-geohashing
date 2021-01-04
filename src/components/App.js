@@ -25,7 +25,7 @@ class App extends React.Component {
     // console.log(e.target.value)
     this.props.changeZIP(e.target.value);
   }
-  ZIPtoCoordinates = (e) =>{
+  ZIPtoCoordinates = () =>{
     // console.log('ZIPtoCoordinates')
     // console.log(this.props.zip)
     this.props.getCoordsRequest(this.props.zip)
@@ -55,7 +55,6 @@ class App extends React.Component {
   getMeetupCoordinates = async () =>{
     await this.getDOWOpening();
     await this.ZIPtoCoordinates();
-    await this.renderMapContainer();
   }
   render(){
     return (
@@ -66,22 +65,23 @@ class App extends React.Component {
             </Col>
             <Col sm="4" md="4" lg="4">
               <Card>
-                <CardTitle>XKCD Geohashing</CardTitle>
-                <CardSubtitle>inspired by xkcd.com/426</CardSubtitle>
+                <CardTitle> XKCD Geohashing</CardTitle>
+                <CardSubtitle>xkcd.com/426</CardSubtitle>
                 <CardBody>
                   <Form>
                     <Input type="date" onChange={this.handleDateInput} max={moment().format("YYYY-MM-DD")} defaultValue = {''} value = {this.props.date}/>
-                    <Button color="primary" onClick = {this.getDOWOpening}>Get DOW Opening</Button>
+                    <Button color = "primary" onClick = {this.getDOWOpening}> Get DOW Data </Button>
                     <u color="secondary" onClick = {this.doToday}> Or just use today's date.</u>
                   </Form>
                     <p> The most recent DOW opening for that day is {this.props.data} </p>
-                    <Form>
-                      <Input onChange={this.handleZIPInput} maxLength="9" defaultValue = {''} value={this.props.zip} />
-                        <Button color="primary" onClick = {this.ZIPtoCoordinates}>Get Coordinates</Button>
-                        <Button color="secondary" onClick = {this.getBrowserCoordinates}>Get location from browser instead</Button>
-                    </Form>
                   <Form>
-                    <Button color="primary" onClick = {this.getMeetupCoordinates}>Get Meetup Coordinates</Button>
+                    <Input onChange={this.handleZIPInput} maxLength="9" defaultValue = {''} value={this.props.zip} defaultValue = "Enter your ZIP" />
+                      <Button color = "primary" onClick = {this.ZIPtoCoordinates}> Set Location </Button>
+                  </Form>
+                    <p> Your meetup coordinates are {this.props.coords.lat} °N, {this.props.coords.lng}°E</p>
+
+                  <Form>
+                    <Button color="primary" onClick = {this.getMeetupCoordinates}>Compute Meetup Coordinates</Button>
                   </Form>
                 </CardBody>
               </Card>
