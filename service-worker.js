@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/xkcd-geohashing/precache-manifest.488569e212f261e44a8863e09d8587eb.js"
+  "/xkcd-geohashing/precache-manifest.9c3e89fd012e269edf6a2ce419abd973.js"
 );
 
 workbox.clientsClaim();
